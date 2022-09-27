@@ -7,7 +7,7 @@ using TodoApi.Services;
 using NLog;
 using Contracts;
 using Todo.Common;
-//GitHubUpdate
+//GitHubUpdateTest
 var builder = WebApplication.CreateBuilder(args);
 
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
