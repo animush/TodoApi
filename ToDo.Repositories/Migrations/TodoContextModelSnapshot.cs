@@ -7,7 +7,7 @@ using ToDo.Repositories;
 
 #nullable disable
 
-namespace TodoApi.Migrations
+namespace ToDo.Repositories.Migrations
 {
     [DbContext(typeof(TodoContext))]
     partial class TodoContextModelSnapshot : ModelSnapshot

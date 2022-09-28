@@ -10,7 +10,7 @@ using Todo.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-//GitHubUpdateTest1
+
 var builder = WebApplication.CreateBuilder(args);
 
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
@@ -32,11 +32,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
-//builder.Services.AddDbContext<TodoContext>(opt =>
-//    opt.UseInMemoryDatabase("TodoList"));
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<TodoContext>(options =>
-    options.UseSqlServer(connString, x => x.MigrationsAssembly("TodoApi")));
+    options.UseSqlServer(connString));
 
 builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 builder.Services.AddScoped<ITodoItemsRepository, TodoItemsRepository>();

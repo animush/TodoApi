@@ -8,11 +8,11 @@ using ToDo.Repositories;
 
 #nullable disable
 
-namespace TodoApi.Migrations
+namespace ToDo.Repositories.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20220928095053_initMigration")]
-    partial class initMigration
+    [Migration("20220928140351_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

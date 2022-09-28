@@ -37,7 +37,7 @@ namespace ToDo.Repositories
 
         public async Task<TodoItem> Create(TodoItem todoItem)
         {
-            todoItem.Id = GenerateId();
+            //todoItem.Id = GenerateId();
 
             _context.TodoItems.Add(todoItem);
             

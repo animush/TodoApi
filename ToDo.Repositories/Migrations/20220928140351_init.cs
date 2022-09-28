@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace TodoApi.Migrations
+namespace ToDo.Repositories.Migrations
 {
-    public partial class initMigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
