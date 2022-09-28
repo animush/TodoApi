@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 //    opt.UseInMemoryDatabase("TodoList"));
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<TodoContext>(options =>
-    options.UseSqlServer(connString));
+    options.UseSqlServer(connString, x => x.MigrationsAssembly("TodoApi")));
 
 builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 builder.Services.AddScoped<ITodoItemsRepository, TodoItemsRepository>();
