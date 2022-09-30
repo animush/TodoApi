@@ -4,10 +4,11 @@ using ToDo.Services.Abstract;
 using TodoApi.Models;
 using System.Data;
 using System.Data.SqlClient;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace TodoApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TodoItemsController : ControllerBase
