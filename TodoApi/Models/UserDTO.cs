@@ -1,6 +1,6 @@
 ﻿namespace TodoApi.Models
 {
-    public class UserModelDTO    
+    public class UserDTO    
     {
         public string Username { get; set; }
         public string FirstName { get; set; }

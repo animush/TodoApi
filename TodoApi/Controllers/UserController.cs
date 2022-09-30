@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Security.Claims;
+using ToDo.Services.Abstract;
 using TodoApi.Models;
 
 namespace TodoApi.Controllers
@@ -11,28 +12,24 @@ namespace TodoApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        //For admin Only
-        [HttpGet]
-        [Route("Admins")]
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminEndPoint()
+        private readonly IUserService _service;
+        public UserController(IUserService service)
         {
-            var currentUser = GetCurrentUser();
-            return Ok($"Hi you are an {currentUser.Role}");
+            _service = service;
         }
-        private UserModel GetCurrentUser()
+
+        [HttpPost]
+        public async Task<ActionResult<UserDTO>> Create(UserDTO userDTO)
         {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            if (identity != null)
-            {
-                var userClaims = identity.Claims;
-                return new UserModel
-                {
-                    Username = userClaims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value,
-                    Role = userClaims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value
-                };
-            }
-            return null;
+            var item = await _service.Create(userDTO.Map());
+
+            return CreatedAtAction(nameof(Create) ,item);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDTO>> Get(int id)
+        {
+            var item = await _service.Get(id);
+            return Ok(item.Map());
         }
     }
 }

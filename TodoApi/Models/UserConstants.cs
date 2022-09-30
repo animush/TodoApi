@@ -2,11 +2,9 @@
 {
     public class UserConstants
     {
-        public static List<UserModel> Users = new()
-        {
-            new UserModel(){ Username="admin",Password="admin",Role="Admin"},
-            new UserModel(){ Username="user",Password="user",Role="User"}
-        };
-
+        public static List<User> Users = new()
+            {
+                    new User(){ Username="admin",Password="admin",Role="Admin"}
+            };
     }
 }

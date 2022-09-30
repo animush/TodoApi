@@ -4,10 +4,11 @@ using ToDo.Services.Abstract;
 using TodoApi.Models;
 using System.Data;
 using System.Data.SqlClient;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace TodoApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TodoItemsController : ControllerBase
@@ -24,10 +25,9 @@ namespace TodoApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItemDTO>>> Get()
         {
+            //Test logger
             _logger.LogInfo("Here is info message from the controller.");
-            _logger.LogDebug("Here is debug message from the controller.");
-            _logger.LogWarn("Here is warn message from the controller.");
-            _logger.LogError("Here is error message from the controller.");
+
             var items = await _service.Get();
 
             return Ok(items.Select(x => x.Map()).ToArray());
@@ -52,6 +52,7 @@ namespace TodoApi.Controllers
         public async Task<ActionResult<TodoItemDTO>> Create(TodoItemDTO todoItemDTO)
         {
             var item = await _service.Create(todoItemDTO.Map());
+
             return CreatedAtAction(
                 nameof(Get),
                 new { id = item.Id },
