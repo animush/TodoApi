@@ -25,5 +25,13 @@ namespace ToDo.Services
         {
             return await _userRepository.Get(userName);
         }
+        public async Task Update(int id, User user)
+        {
+            await _userRepository.Update(id, user);
+        }
+        public async Task Delete(int id)
+        {
+            await _userRepository.Delete(id);
+        }
     }
 }

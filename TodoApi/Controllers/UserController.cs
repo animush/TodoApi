@@ -31,5 +31,19 @@ namespace TodoApi.Controllers
             var item = await _service.Get(id);
             return Ok(item.Map());
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, UserDTO userDTO)
+        {
+            await _service.Update(id, userDTO.Map());
+
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _service.Delete(id);
+
+            return NoContent();
+        }
     }
 }
