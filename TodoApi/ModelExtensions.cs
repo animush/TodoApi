@@ -9,7 +9,12 @@ namespace TodoApi
             return new TodoItem
             {
                 Name = dto.Name,
-                IsComplete = dto.IsComplete
+                IsComplete = dto.IsComplete,
+                ResponsibleUser = dto.ResponsibleUser,
+                //CreatedUser = dto.CreatedUser,
+                //CreatedDate = dto.CreatedDate,
+                //UpdatdeUser = dto.UpdatdeUser,
+                //UpatededDate = dto.UpatededDate
             };
         }
         public static TodoItemDTO Map(this TodoItem todoItem) =>
@@ -17,7 +22,13 @@ namespace TodoApi
             {
                 Id = todoItem.Id,
                 Name = todoItem.Name,
-                IsComplete = todoItem.IsComplete
+                IsComplete = todoItem.IsComplete,
+                ResponsibleUser = todoItem.ResponsibleUser,
+                //CreatedUser = todoItem.CreatedUser,
+                //CreatedDate = todoItem.CreatedDate,
+                //UpdatdeUser = todoItem.UpdatdeUser,
+                //UpatededDate = todoItem.UpatededDate
+
             };
         public static User Map(this UserDTO dto)
         {

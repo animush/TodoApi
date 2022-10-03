@@ -9,5 +9,6 @@ namespace ToDo.Services.Abstract
         Task<TodoItem> Get(int id);
         Task Update(int id, TodoItem todoItem);
         Task Delete(int id);
+        Task AssignResponsibleUser(int todoItemId, int userId);
     }
 }

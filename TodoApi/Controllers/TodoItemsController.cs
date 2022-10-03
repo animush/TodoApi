@@ -66,6 +66,13 @@ namespace TodoApi.Controllers
 
             return NoContent();
         }
+        [HttpPatch("{itemId}/AssignUser/{userId}")]
+        public async Task<IActionResult> AssignUser(int itemId, int userId)
+        {
+            await _service.AssignResponsibleUser(itemId, userId);
+
+            return NoContent();
+        }
 
     }
 }

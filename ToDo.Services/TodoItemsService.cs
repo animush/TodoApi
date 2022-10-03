@@ -12,11 +12,13 @@ namespace TodoApi.Services
         private IModelValidations _validation { get; set; }
 
         private ITodoItemsRepository _todoItemsRepository { get; set; }
+        private IUserRepository _userRepository { get; set; }
 
-        public TodoItemsService(ITodoItemsRepository todoItemsRepository, IModelValidations validation)
+        public TodoItemsService(ITodoItemsRepository todoItemsRepository, IModelValidations validation, IUserRepository userRepository)
         {
             _todoItemsRepository = todoItemsRepository;
             _validation = validation;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<TodoItem>> Get()
@@ -32,6 +34,10 @@ namespace TodoApi.Services
 
         public async Task Update(int id, TodoItem todoItem)
         {
+            //!
+            todoItem.UpatededDate = DateTime.Now;
+            todoItem.CreatedUser = await _userRepository.Get(UserContext.CurrentUserId);
+
             await _todoItemsRepository.Update(id, todoItem);
         }
 
@@ -40,6 +46,8 @@ namespace TodoApi.Services
             if (!_validation.Validate(todoItem))
                 throw new Exception();
 
+            todoItem.CreatedDate = DateTime.Now;
+            todoItem.CreatedUser = await _userRepository.Get(UserContext.CurrentUserId);
 
             return await _todoItemsRepository.Create(todoItem);
         }
@@ -47,6 +55,13 @@ namespace TodoApi.Services
         {
             await _todoItemsRepository.Delete(id);
         }
-        
+
+        public async Task AssignResponsibleUser(int todoItemId, int userId)
+        {
+            var item = await _todoItemsRepository.Get(todoItemId);
+            var user = await _userRepository.Get(userId);
+            item.ResponsibleUser = user;
+            await _todoItemsRepository.Update(todoItemId, item);
+        }
     }
 }

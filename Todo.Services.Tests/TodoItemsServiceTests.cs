@@ -13,13 +13,14 @@ namespace Todo.Services.Tests
         private TodoItemsService TodoItemsService { get; set; }
         private Mock<ITodoItemsRepository> _todoItemsRepoMock;
         private Mock<IModelValidations> _modelValidationMock;
+        private Mock<IUserRepository> _userRepositoryMock;
 
         [TestInitialize]
         public void ClassInit()
         {
             _todoItemsRepoMock = new Mock<ITodoItemsRepository>();
             _modelValidationMock = new Mock<IModelValidations>();
-            TodoItemsService = new TodoItemsService(_todoItemsRepoMock.Object, _modelValidationMock.Object);
+            TodoItemsService = new TodoItemsService(_todoItemsRepoMock.Object, _modelValidationMock.Object, _userRepositoryMock.Object);
         }
 
         [TestMethod]

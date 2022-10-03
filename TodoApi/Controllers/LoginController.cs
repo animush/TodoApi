@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ToDo.Models;
+using ToDo.Services;
 using ToDo.Services.Abstract;
 using TodoApi.Models;
 
@@ -66,6 +67,7 @@ namespace TodoApi.Controllers
             var currentUser = await _service.Get(userLogin.Username);
             if (currentUser != null && currentUser.Password == userLogin.Password)
             {
+                UserContext.CurrentUserId = currentUser.Id;
                 return currentUser;
             }
             return null;

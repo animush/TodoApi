@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDo.Repositories;
 
@@ -11,9 +12,10 @@ using ToDo.Repositories;
 namespace ToDo.Repositories.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    partial class TodoContextModelSnapshot : ModelSnapshot
+    [Migration("20221003084508_addResponsibleUser")]
+    partial class addResponsibleUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,12 +32,6 @@ namespace ToDo.Repositories.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedUserId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsComplete")
                         .HasColumnType("bit");
 
@@ -46,19 +42,9 @@ namespace ToDo.Repositories.Migrations
                     b.Property<int?>("ResponsibleUserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpatededDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatdeUserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedUserId");
-
                     b.HasIndex("ResponsibleUserId");
-
-                    b.HasIndex("UpdatdeUserId");
 
                     b.ToTable("TodoItems");
                 });
@@ -98,25 +84,11 @@ namespace ToDo.Repositories.Migrations
 
             modelBuilder.Entity("TodoApi.Models.TodoItem", b =>
                 {
-                    b.HasOne("TodoApi.Models.User", "CreatedUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TodoApi.Models.User", "ResponsibleUser")
                         .WithMany()
                         .HasForeignKey("ResponsibleUserId");
 
-                    b.HasOne("TodoApi.Models.User", "UpdatdeUser")
-                        .WithMany()
-                        .HasForeignKey("UpdatdeUserId");
-
-                    b.Navigation("CreatedUser");
-
                     b.Navigation("ResponsibleUser");
-
-                    b.Navigation("UpdatdeUser");
                 });
 #pragma warning restore 612, 618
         }
