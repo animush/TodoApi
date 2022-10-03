@@ -1,7 +1,7 @@
 ﻿namespace ToDo.Services
 {
-    public static class UserContext
+    public class UserContext
     {
-        public static int CurrentUserId { get; set; }
+        public int CurrentUserId { get; set; }
     }
 }

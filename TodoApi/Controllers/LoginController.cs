@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,10 +17,13 @@ namespace TodoApi.Controllers
     {
         private readonly IUserService _service;
         private readonly IConfiguration _config;
-        public LoginController(IConfiguration config, IUserService service)
+        private readonly UserContext _userContext;
+
+        public LoginController(IConfiguration config, IUserService service, UserContext userContext)
         {
             _config = config;
             _service = service;
+            _userContext = userContext;
         }
 
         [AllowAnonymous]
@@ -46,7 +48,8 @@ namespace TodoApi.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier,user.Username),
-                new Claim(ClaimTypes.Role,user.Role)
+                new Claim(ClaimTypes.Role,user.Role),
+                new Claim(ClaimTypes.UserData,user.Id.ToString())
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Audience"],
@@ -67,7 +70,6 @@ namespace TodoApi.Controllers
             var currentUser = await _service.Get(userLogin.Username);
             if (currentUser != null && currentUser.Password == userLogin.Password)
             {
-                UserContext.CurrentUserId = currentUser.Id;
                 return currentUser;
             }
             return null;

@@ -4,6 +4,6 @@ namespace ToDo.Services
 {
     public interface IModelValidations
     {
-        bool Validate(TodoItem todoItem);
+        Task<bool> Validate(TodoItem todoItem);
     }
 }

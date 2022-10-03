@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Moq;
 using ToDo.Repositories.Abstract;
 using ToDo.Services;
 using TodoApi.Models;
@@ -10,17 +9,20 @@ namespace Todo.Services.Tests
     [TestClass]
     public class TodoItemsServiceTests
     {
-        private TodoItemsService TodoItemsService { get; set; }
+        private TodoItemsService TodoItemsService;
         private Mock<ITodoItemsRepository> _todoItemsRepoMock;
         private Mock<IModelValidations> _modelValidationMock;
         private Mock<IUserRepository> _userRepositoryMock;
-
+        private Mock<UserContext> _userContextMock;
         [TestInitialize]
         public void ClassInit()
         {
             _todoItemsRepoMock = new Mock<ITodoItemsRepository>();
             _modelValidationMock = new Mock<IModelValidations>();
-            TodoItemsService = new TodoItemsService(_todoItemsRepoMock.Object, _modelValidationMock.Object, _userRepositoryMock.Object);
+            _userRepositoryMock = new Mock<IUserRepository>();
+            _userContextMock = new Mock<UserContext>();
+
+            TodoItemsService = new TodoItemsService(_todoItemsRepoMock.Object, _modelValidationMock.Object, _userRepositoryMock.Object, _userContextMock.Object);
         }
 
         [TestMethod]
@@ -40,11 +42,11 @@ namespace Todo.Services.Tests
 
             // Act
             var item = await TodoItemsService.Get(itemId);
+
             // Assert
             Assert.AreEqual(todoItem.Id, item.Id);
             Assert.AreEqual(todoItem.Name, item.Name);
             Assert.AreEqual(todoItem.IsComplete, item.IsComplete);
-
         }
 
         [TestMethod]
@@ -57,16 +59,17 @@ namespace Todo.Services.Tests
 
             // Act
             var item = await TodoItemsService.Get(itemId);
+
             // Assert
             _todoItemsRepoMock.Verify(x => x.Get(itemId), Times.Once());
         }
 
         [TestMethod]
-        public void WhenValidateReturnTrue()
+        public async Task WhenValidateReturnTrue()
         {
             // Arrange
             TodoItem model = new TodoItem();
-            _modelValidationMock.Setup(x => x.Validate(model)).Returns(true); 
+            _modelValidationMock.Setup(x => x.Validate(model)).ReturnsAsync(true); 
 
             // Act
             var result = TodoItemsService.Create(model);
@@ -75,17 +78,15 @@ namespace Todo.Services.Tests
         }
 
         [TestMethod]
-        public void WhenValidateReturnFalse()
+        public async Task WhenValidateReturnFalse()
         {
             // Arrange
             TodoItem model = new TodoItem();
-            _modelValidationMock.Setup(x => x.Validate(model)).Returns(false);
+            _modelValidationMock.Setup(x => x.Validate(model)).ReturnsAsync(false);
 
             // Act
-            
             // Assert
-            Assert.ThrowsException<Exception>(() => TodoItemsService.Create(model));
-            
+            await Assert.ThrowsExceptionAsync <Exception>(() => TodoItemsService.Create(model));
         }
     }
 }

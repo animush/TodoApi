@@ -1,6 +1,5 @@
 using ToDo.Services;
 using TodoApi.Models;
-using TodoApi.Services;
 
 namespace Todo.Services.Tests
 {
@@ -10,7 +9,7 @@ namespace Todo.Services.Tests
         private ModelValidations ModelValidations { get; set; }
 
         [TestMethod]
-        public void ValidateSuccess()
+        public async Task ValidateSuccess()
         {
             // Arrange
             ModelValidations = new ModelValidations();
@@ -18,13 +17,14 @@ namespace Todo.Services.Tests
             TodoItem model = new TodoItem { Name = "Test" };
 
             // Act
-            var result = ModelValidations.Validate(model);
+            var result = await ModelValidations.Validate(model);
+
             // Assert
             Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void Validate_NameIsNull()
+        public async Task Validate_NameIsNull()
         {
             // Arrange
             ModelValidations = new ModelValidations();
@@ -32,12 +32,13 @@ namespace Todo.Services.Tests
             TodoItem model = new TodoItem { Name = null };
 
             // Act
-            var result = ModelValidations.Validate(model);
+            var result = await ModelValidations.Validate(model);
+
             // Assert
             Assert.IsFalse(result);
         }
         [TestMethod]
-        public void Validate_NameIsEmpty()
+        public async Task Validate_NameIsEmpty()
         {
             // Arrange
             ModelValidations = new ModelValidations();
@@ -45,12 +46,13 @@ namespace Todo.Services.Tests
             TodoItem model = new TodoItem { Name = String.Empty };
 
             // Act
-            var result = ModelValidations.Validate(model);
+            var result = await ModelValidations.Validate(model);
+
             // Assert
             Assert.IsFalse(result);
         }
         [TestMethod]
-        public void Validate_NameIsWhitespace()
+        public async Task Validate_NameIsWhitespace()
         {
             // Arrange
             ModelValidations = new ModelValidations();
@@ -58,7 +60,8 @@ namespace Todo.Services.Tests
             TodoItem model = new TodoItem { Name = "  " };
 
             // Act
-            var result = ModelValidations.Validate(model);
+            var result = await ModelValidations.Validate(model);
+
             // Assert
             Assert.IsFalse(result);
         }
