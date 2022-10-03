@@ -36,7 +36,7 @@ namespace TodoApi.Services
         {
             //!
             todoItem.UpatededDate = DateTime.Now;
-            todoItem.CreatedUser = await _userRepository.Get(UserContext.CurrentUserId);
+            todoItem.UpdatdeUser = await _userRepository.Get(UserContext.CurrentUserId);
 
             await _todoItemsRepository.Update(id, todoItem);
         }
