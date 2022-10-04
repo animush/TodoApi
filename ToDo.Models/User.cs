@@ -11,8 +11,8 @@
 
         //public User CreatedUser { get; set; }
         //public DateTime CreatedDate { get; set; }
-        ////public User? UpdatdeUser { get; set; }
-        ////public DateTime? UpatededDate { get; set; }
+        //public User? UpdatdeUser { get; set; }
+        //public DateTime? UpatededDate { get; set; }
 
     }
 }

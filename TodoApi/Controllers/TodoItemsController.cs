@@ -49,7 +49,7 @@ namespace TodoApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TodoItemDTO>> Create(TodoItemDTO todoItemDTO)
+        public async Task<ActionResult<TodoItemDTO>> Create(CreateTodoItemDTO todoItemDTO)
         {
             var item = await _service.Create(todoItemDTO.Map());
 

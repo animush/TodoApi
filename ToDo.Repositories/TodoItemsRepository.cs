@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using ToDo.Repositories.Abstract;
 using TodoApi.Models;
 
@@ -6,11 +9,12 @@ namespace ToDo.Repositories
 {
     public class TodoItemsRepository : ITodoItemsRepository
     {
-
+        private readonly ILoggerManager _logger;
         private readonly TodoContext _context;
-        public TodoItemsRepository(TodoContext context)
+        public TodoItemsRepository(TodoContext context, ILoggerManager logger)
         {
             _context = context;
+            _logger = logger;
         }
         
         public async Task<IEnumerable<TodoItem>> Get()
@@ -22,7 +26,9 @@ namespace ToDo.Repositories
         public async Task<TodoItem> Get(int id)
         {
             var todoItem = await _context.TodoItems.FindAsync(id);
+            
             if (todoItem == null) throw new Exception($"TodoItem with id = {id} doesn't exists");
+               
             return todoItem;
         }
 
@@ -37,7 +43,7 @@ namespace ToDo.Repositories
 
         public async Task<TodoItem> Create(TodoItem todoItem)
         {
-            //todoItem.Id = GenerateId();
+            
 
             _context.TodoItems.Add(todoItem);
             
@@ -45,10 +51,6 @@ namespace ToDo.Repositories
            
             return todoItem;
         }
-        public int GenerateId() => 
-            _context.TodoItems.Any() ?
-            _context.TodoItems.Select(x => x.Id).Max() + 1
-                : 1;
         public async Task Delete(int id)
         {
             var todoItem = await _context.TodoItems.FindAsync(id);

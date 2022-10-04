@@ -46,6 +46,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<UserContext, UserContext>();
 
+
 var app = builder.Build();
 
 
@@ -55,6 +56,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseErrorHandlingMiddleware();
 
 app.UseHttpsRedirection();
 

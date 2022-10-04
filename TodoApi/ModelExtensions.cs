@@ -8,15 +8,26 @@ namespace TodoApi
         {
             return new TodoItem
             {
+                Id = dto.Id,
                 Name = dto.Name,
                 IsComplete = dto.IsComplete,
                 ResponsibleUser = dto.ResponsibleUser,
-                CreatedUser = dto.CreatedUser,
-                CreatedDate = dto.CreatedDate,
+                //CreatedUser = dto.CreatedUser,
+                //CreatedDate = dto.CreatedDate,
                 //UpdatdeUser = dto.UpdatdeUser,
                 //UpatededDate = dto.UpatededDate
             };
         }
+
+        public static TodoItem Map(this CreateTodoItemDTO dto)
+        {
+            return new TodoItem
+            {
+                Name = dto.Name,
+                IsComplete = dto.IsComplete
+            };
+        }
+
         public static TodoItemDTO Map(this TodoItem todoItem) =>
             new TodoItemDTO
             {
@@ -26,8 +37,8 @@ namespace TodoApi
                 ResponsibleUser = todoItem.ResponsibleUser,
                 CreatedUser = todoItem.CreatedUser,
                 CreatedDate = todoItem.CreatedDate,
-                //UpdatdeUser = todoItem.UpdatdeUser,
-                //UpatededDate = todoItem.UpatededDate
+                UpdatdeUser = todoItem.UpdatdeUser,
+                UpatededDate = todoItem.UpatededDate
 
             };
         public static User Map(this UserDTO dto)
