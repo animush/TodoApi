@@ -11,8 +11,8 @@ namespace TodoApi
                 Name = dto.Name,
                 IsComplete = dto.IsComplete,
                 ResponsibleUser = dto.ResponsibleUser,
-                //CreatedUser = dto.CreatedUser,
-                //CreatedDate = dto.CreatedDate,
+                CreatedUser = dto.CreatedUser,
+                CreatedDate = dto.CreatedDate,
                 //UpdatdeUser = dto.UpdatdeUser,
                 //UpatededDate = dto.UpatededDate
             };
@@ -24,8 +24,8 @@ namespace TodoApi
                 Name = todoItem.Name,
                 IsComplete = todoItem.IsComplete,
                 ResponsibleUser = todoItem.ResponsibleUser,
-                //CreatedUser = todoItem.CreatedUser,
-                //CreatedDate = todoItem.CreatedDate,
+                CreatedUser = todoItem.CreatedUser,
+                CreatedDate = todoItem.CreatedDate,
                 //UpdatdeUser = todoItem.UpdatdeUser,
                 //UpatededDate = todoItem.UpatededDate
 

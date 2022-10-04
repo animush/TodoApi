@@ -35,8 +35,8 @@ namespace TodoApi.Services
         public async Task Update(int id, TodoItem todoItem)
         {
             //!
-            todoItem.UpatededDate = DateTime.Now;
-            todoItem.UpdatdeUser = await _userRepository.Get(UserContext.CurrentUserId);
+            //todoItem.UpatededDate = DateTime.Now;
+            //todoItem.UpdatdeUser = await _userRepository.Get(UserContext.CurrentUserId);
 
             await _todoItemsRepository.Update(id, todoItem);
         }

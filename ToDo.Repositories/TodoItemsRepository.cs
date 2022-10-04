@@ -31,7 +31,7 @@ namespace ToDo.Repositories
             var todoItemEx = await _context.TodoItems.FindAsync(id);
             if (todoItemEx == null) throw new Exception($"TodoItem with id = {id} doesn't exists");
             todoItemEx.Name = todoItem.Name;
-            todoItem.IsComplete = todoItem.IsComplete;
+            todoItemEx.IsComplete = todoItem.IsComplete;
             await _context.SaveChangesAsync();
         }
 
