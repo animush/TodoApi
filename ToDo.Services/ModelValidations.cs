@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TodoApi.Models;
+﻿using TodoApi.Models;
 
 namespace ToDo.Services
 {
     public class ModelValidations : IModelValidations
     {
-        public bool Validate(TodoItem todoItem)
+        public async Task<bool> Validate(TodoItem todoItem)
         {
             if (string.IsNullOrWhiteSpace(todoItem.Name))
                 return false;
