@@ -27,7 +27,8 @@ namespace ToDo.Repositories
         {
             var todoItem = await _context.TodoItems.FindAsync(id);
             
-            if (todoItem == null) throw new Exception($"TodoItem with id = {id} doesn't exists");
+            if (todoItem == null) 
+                throw new Exception($"TodoItem with id = {id} doesn't exists");
                
             return todoItem;
         }

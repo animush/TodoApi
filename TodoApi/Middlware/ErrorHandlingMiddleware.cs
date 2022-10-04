@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Net;
 
+
 namespace TodoApi.Middlware
 {
     public class ErrorHandlingMiddleware
@@ -35,7 +36,7 @@ namespace TodoApi.Middlware
     {
         public static IApplicationBuilder UseErrorHandlingMiddleware(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<ContextMiddleware>();
+            return builder.UseMiddleware<ErrorHandlingMiddleware>();
         }
     }
 }
