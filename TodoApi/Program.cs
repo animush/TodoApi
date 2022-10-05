@@ -38,6 +38,7 @@ var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<TodoContext>(options =>
     options.UseSqlServer(connString));
 
+
 builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 builder.Services.AddScoped<ITodoItemsRepository, TodoItemsRepository>();
 builder.Services.AddScoped<ITodoItemsService, TodoItemsService>();
@@ -45,6 +46,8 @@ builder.Services.AddScoped<IModelValidations, ModelValidations>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<UserContext, UserContext>();
+builder.Services.AddScoped<IToolService, ToolService>();
+builder.Services.AddScoped<IToolRepository, ToolRepository>();
 
 
 var app = builder.Build();

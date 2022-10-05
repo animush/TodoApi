@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDo.Repositories;
 
@@ -11,9 +12,10 @@ using ToDo.Repositories;
 namespace ToDo.Repositories.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    partial class TodoContextModelSnapshot : ModelSnapshot
+    [Migration("20221005122125_testMigration")]
+    partial class testMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace ToDo.Repositories.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tools", (string)null);
+                    b.ToTable("Tools");
                 });
 
             modelBuilder.Entity("TodoApi.Models.TodoItem", b =>
@@ -77,7 +79,7 @@ namespace ToDo.Repositories.Migrations
 
                     b.HasIndex("UpdatdeUserId");
 
-                    b.ToTable("TodoItems");
+                    b.ToTable("List2Do", (string)null);
                 });
 
             modelBuilder.Entity("TodoApi.Models.User", b =>

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDo.Models;
+﻿using ToDo.Models;
 using ToDo.Repositories.Abstract;
-using TodoApi.Models;
 
 namespace ToDo.Repositories
 {

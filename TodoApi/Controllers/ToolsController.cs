@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDo.Services.Abstract;
 using TodoApi.Models;
 
 namespace TodoApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ToolsController :  ControllerBase
@@ -16,9 +18,9 @@ namespace TodoApi.Controllers
         [HttpPost]
         public async Task<ActionResult<ToolDTO>> Create(ToolDTO toolDTO)
         {
-            var item = await _service.Create(toolDTO.Map());
+            var tool = await _service.Create(toolDTO.Map());
 
-            return CreatedAtAction(nameof(Create), item);
+            return CreatedAtAction(nameof(Create), tool);
         }
     }
 }
