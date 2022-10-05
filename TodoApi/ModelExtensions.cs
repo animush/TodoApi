@@ -1,4 +1,5 @@
-﻿using TodoApi.Models;
+﻿using ToDo.Models;
+using TodoApi.Models;
 
 namespace TodoApi
 {
@@ -61,6 +62,20 @@ namespace TodoApi
                 LastName = userModel.LastName,
                 Password = userModel.Password,
                 Role = userModel.Role,
+            };
+        }
+        public static Tool Map(this ToolDTO dto)
+        {
+            return new Tool
+            {
+               ToolName = dto.ToolName,
+            };
+        }
+        public static ToolDTO Map(this Tool tool)
+        {
+            return new ToolDTO
+            {
+                ToolName = tool.ToolName,
             };
         }
     }

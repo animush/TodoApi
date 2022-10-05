@@ -40,6 +40,21 @@ namespace TodoApi.Controllers
             return Ok(item.Map());
         }
 
+        [HttpGet("byUser/{id}")]
+        public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetByUser(int userId)
+        {
+            //var item = await _service.Get(id);
+            //return Ok(item.Map());
+            throw new NotImplementedException();
+        }
+        [HttpGet("byCreationDate/{dt}")]
+        public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetByCreationDate(DateTime dt)
+        {
+            //var item = await _service.Get(id);
+            //return Ok(item.Map());
+            throw new NotImplementedException();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, TodoItemDTO todoItemDTO)
         {

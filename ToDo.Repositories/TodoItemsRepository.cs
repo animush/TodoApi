@@ -1,7 +1,5 @@
 ﻿using Contracts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 using ToDo.Repositories.Abstract;
 using TodoApi.Models;
 
@@ -28,10 +26,11 @@ namespace ToDo.Repositories
             var todoItem = await _context.TodoItems.FindAsync(id);
             
             if (todoItem == null) 
-                throw new Exception($"TodoItem with id = {id} doesn't exists");
+                throw new KeyNotFoundException($"TodoItem with id = {id} doesn't exists");
                
             return todoItem;
         }
+        
 
         public async Task Update(int id, TodoItem todoItem)
         {

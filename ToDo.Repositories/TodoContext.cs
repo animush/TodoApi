@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
+using ToDo.Models;
 using TodoApi.Models;
 
 namespace ToDo.Repositories
@@ -13,5 +13,11 @@ namespace ToDo.Repositories
         
         public DbSet<TodoItem> TodoItems { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Tool> Tools { get; set; } = null!;
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var todoItems = modelBuilder.Entity<TodoItem>();
+
+        }
     }
 }
