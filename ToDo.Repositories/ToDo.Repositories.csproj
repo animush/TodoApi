@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\LoggerService\Todo.Common.csproj" />
     <ProjectReference Include="..\ToDo.Repositories.Abstract\ToDo.Repositories.Abstract.csproj" />
   </ItemGroup>
 
