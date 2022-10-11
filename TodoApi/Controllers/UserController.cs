@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Security.Claims;
 using ToDo.Services.Abstract;
-using TodoApi.Models;
+using ToDo.Models;
 
-namespace TodoApi.Controllers
+namespace ToDo.Controllers
 {
     
     [Route("api/[controller]")]

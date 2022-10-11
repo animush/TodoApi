@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToDo.Repositories.Abstract;
-using TodoApi.Models;
+using ToDo.Models;
 
 namespace ToDo.Repositories
 {

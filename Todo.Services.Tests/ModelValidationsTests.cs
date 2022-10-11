@@ -1,7 +1,7 @@
 using ToDo.Services;
-using TodoApi.Models;
+using ToDo.Models;
 
-namespace Todo.Services.Tests
+namespace ToDo.Services.Tests
 {
     [TestClass]
     public class ModelValidationsTests

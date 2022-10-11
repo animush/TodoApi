@@ -1,7 +1,7 @@
 ﻿using ToDo.Models;
-using TodoApi.Models;
+using ToDo.Models;
 
-namespace TodoApi
+namespace ToDo
 {
     public static class ModelExtensions
     {
@@ -13,10 +13,10 @@ namespace TodoApi
                 Name = dto.Name,
                 IsComplete = dto.IsComplete,
                 ResponsibleUser = dto.ResponsibleUser,
-                //CreatedUser = dto.CreatedUser,
-                //CreatedDate = dto.CreatedDate,
-                //UpdatdeUser = dto.UpdatdeUser,
-                //UpatededDate = dto.UpatededDate
+                CreatedUser = dto.CreatedUser,
+                CreatedDate = dto.CreatedDate,
+                UpdatdeUser = dto.UpdatdeUser,
+                UpatededDate = dto.UpatededDate
             };
         }
 

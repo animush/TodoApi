@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using ToDo.Services;
 
-namespace TodoApi.Middlware
+namespace ToDo.Middlware
 {
     public class ContextMiddleware
     {

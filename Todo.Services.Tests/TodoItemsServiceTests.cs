@@ -1,10 +1,10 @@
 ﻿using Moq;
 using ToDo.Repositories.Abstract;
 using ToDo.Services;
-using TodoApi.Models;
-using TodoApi.Services;
+using ToDo.Models;
+using ToDo.Services;
 
-namespace Todo.Services.Tests
+namespace ToDo.Services.Tests
 {
     [TestClass]
     public class TodoItemsServiceTests

@@ -1,6 +1,6 @@
 ﻿using ToDo.Repositories.Abstract;
 using ToDo.Services.Abstract;
-using TodoApi.Models;
+using ToDo.Models;
 
 namespace ToDo.Services
 {

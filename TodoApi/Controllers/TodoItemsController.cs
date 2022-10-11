@@ -1,12 +1,12 @@
 ﻿using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Services.Abstract;
-using TodoApi.Models;
+using ToDo.Models;
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 
-namespace TodoApi.Controllers
+namespace ToDo.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
@@ -25,9 +25,6 @@ namespace TodoApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItemDTO>>> Get()
         {
-            //Test logger
-            _logger.LogInfo("Here is info message from the controller.");
-
             var items = await _service.Get();
 
             return Ok(items.Select(x => x.Map()).ToArray());
@@ -40,20 +37,20 @@ namespace TodoApi.Controllers
             return Ok(item.Map());
         }
 
-        [HttpGet("byUser/{id}")]
-        public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetByUser(int userId)
-        {
-            //var item = await _service.Get(id);
-            //return Ok(item.Map());
-            throw new NotImplementedException();
-        }
-        [HttpGet("byCreationDate/{dt}")]
-        public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetByCreationDate(DateTime dt)
-        {
-            //var item = await _service.Get(id);
-            //return Ok(item.Map());
-            throw new NotImplementedException();
-        }
+        //[HttpGet("byUser/{id}")]
+        //public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetByUser(int userId)
+        //{
+        //    //var item = await _service.Get(id);
+        //    //return Ok(item.Map());
+        //    throw new NotImplementedException();
+        //}
+        //[HttpGet("byCreationDate/{dt}")]
+        //public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetByCreationDate(DateTime dt)
+        //{
+        //    //var item = await _service.Get(id);
+        //    //return Ok(item.Map());
+        //    throw new NotImplementedException();
+        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, TodoItemDTO todoItemDTO)

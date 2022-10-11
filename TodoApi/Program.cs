@@ -3,20 +3,18 @@ using ToDo.Repositories;
 using ToDo.Repositories.Abstract;
 using ToDo.Services;
 using ToDo.Services.Abstract;
-using TodoApi.Services;
+using ToDo.Services;
 using NLog;
 using Contracts;
-using Todo.Common;
+using ToDo.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using TodoApi.Middlware;
+using ToDo.Middlware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
@@ -49,11 +47,8 @@ builder.Services.AddScoped<UserContext, UserContext>();
 builder.Services.AddScoped<IToolService, ToolService>();
 builder.Services.AddScoped<IToolRepository, ToolRepository>();
 
-
 var app = builder.Build();
 
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

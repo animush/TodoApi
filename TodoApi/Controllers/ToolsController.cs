@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Services.Abstract;
-using TodoApi.Models;
+using ToDo.Models;
 
-namespace TodoApi.Controllers
+namespace ToDo.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToDo.Models;
-using TodoApi.Models;
+using ToDo.Models;
 
 namespace ToDo.Repositories
 {
@@ -12,16 +12,19 @@ namespace ToDo.Repositories
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var todoItems = modelBuilder.Entity<TodoItem>();
-            var users = modelBuilder.Entity<User>();
-            var tools = modelBuilder.Entity<Tool>();
-
-            tools.ToTable("Tools");
-
+            modelBuilder.Entity<TodoItem_Tool>()
+                .HasOne(i => i.TodoItem)
+                .WithMany(t => t.TodoItem_Tool)
+                .HasForeignKey(i => i.TodoItemId);
+            modelBuilder.Entity<TodoItem_Tool>()
+                .HasOne(t => t.Tool)
+                .WithMany(i => i.TodoItem_Tool)
+                .HasForeignKey(i => i.ToolId);
         }
         public DbSet<TodoItem> TodoItems { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Tool> Tools { get; set; } = null!;
-        
+        public DbSet<TodoItem_Tool> TodoItem_Tool { get; set; } = null!;
+
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Contracts;
 using Microsoft.EntityFrameworkCore;
-using Todo.Common.Exceptions;
+using ToDo.Common.Exceptions;
 using ToDo.Repositories.Abstract;
-using TodoApi.Models;
+using ToDo.Models;
 
 namespace ToDo.Repositories
 {
@@ -31,21 +31,21 @@ namespace ToDo.Repositories
                
             return todoItem;
         }
-        
 
         public async Task Update(int id, TodoItem todoItem)
         {
             var todoItemEx = await _context.TodoItems.FindAsync(id);
-            if (todoItemEx == null) throw new Exception($"TodoItem with id = {id} doesn't exists");
+            if (todoItemEx == null) throw new EntityNotFoundException($"TodoItem with id = {id} doesn't exists");
+
             todoItemEx.Name = todoItem.Name;
             todoItemEx.IsComplete = todoItem.IsComplete;
+            todoItemEx.CreatedUser = todoItem.CreatedUser;
+
             await _context.SaveChangesAsync();
         }
 
         public async Task<TodoItem> Create(TodoItem todoItem)
         {
-            
-
             _context.TodoItems.Add(todoItem);
             
             await _context.SaveChangesAsync();

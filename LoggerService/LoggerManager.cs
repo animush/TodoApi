@@ -1,7 +1,7 @@
 ﻿using Contracts;
 using NLog;
 
-namespace Todo.Common
+namespace ToDo.Common
 {
     public class LoggerManager : ILoggerManager
     {

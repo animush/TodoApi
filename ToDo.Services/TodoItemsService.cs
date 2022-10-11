@@ -3,9 +3,9 @@ using ToDo.Repositories;
 using ToDo.Repositories.Abstract;
 using ToDo.Services;
 using ToDo.Services.Abstract;
-using TodoApi.Models;
+using ToDo.Models;
 
-namespace TodoApi.Services
+namespace ToDo.Services
 {
     public class TodoItemsService : ITodoItemsService
     {
@@ -32,10 +32,8 @@ namespace TodoApi.Services
             return await _todoItemsRepository.Get(id);
         }
 
-
         public async Task Update(int id, TodoItem todoItem)
         {
-            //!
             todoItem.UpatededDate = DateTime.Now;
             todoItem.UpdatdeUser = await _userRepository.Get(_userContext.CurrentUserId);
 

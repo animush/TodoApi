@@ -1,4 +1,4 @@
-﻿namespace TodoApi.Models
+﻿namespace ToDo.Models
 {
     public class UserConstants
     {

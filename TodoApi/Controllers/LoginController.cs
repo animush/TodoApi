@@ -7,9 +7,9 @@ using System.Text;
 using ToDo.Models;
 using ToDo.Services;
 using ToDo.Services.Abstract;
-using TodoApi.Models;
+using ToDo.Models;
 
-namespace TodoApi.Controllers
+namespace ToDo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

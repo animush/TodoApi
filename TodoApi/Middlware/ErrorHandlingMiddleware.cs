@@ -3,7 +3,7 @@ using System.Net;
 using System.Text.Json;
 
 
-namespace TodoApi.Middlware
+namespace ToDo.Middlware
 {
     public class ErrorHandlingMiddleware
     {
@@ -12,25 +12,6 @@ namespace TodoApi.Middlware
         {
             _next = next;
         }
-        //public async Task Invoke(HttpContext context)
-        //{
-        //    try
-        //    {
-        //        await _next(context);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await HandleExceptionAsync(context, ex);
-        //    }
-        //}
-        //private static Task HandleExceptionAsync(HttpContext context, Exception exception)
-        //{
-        //    var code = HttpStatusCode.NotFound;
-        //    var result = JsonConvert.SerializeObject(new { NotFound = code });
-        //    context.Response.ContentType = "application/json";
-        //    context.Response.StatusCode = (int)code;
-        //    return context.Response.WriteAsync(result);
-        //}
         public async Task Invoke(HttpContext context)
         {
             try
