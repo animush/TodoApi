@@ -5,6 +5,7 @@ using ToDo.Models;
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace ToDo.Controllers
 {
@@ -13,13 +14,15 @@ namespace ToDo.Controllers
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly ITodoItemsService _service;
         private readonly ILoggerManager _logger;
 
-        public TodoItemsController(ITodoItemsService service, ILoggerManager logger)
+        public TodoItemsController(ITodoItemsService service, ILoggerManager logger, IMapper mapper)
         {
             _service = service;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,7 +37,8 @@ namespace ToDo.Controllers
         public async Task<ActionResult<TodoItemDTO>> Get(int id)
         {
             var item = await _service.Get(id);
-            return Ok(item.Map());
+            //return Ok(item.Map());
+            return Ok(_mapper.Map<TodoItemDTO>(item));
         }
 
         //[HttpGet("byUser/{id}")]

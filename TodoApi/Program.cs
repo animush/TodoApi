@@ -11,11 +11,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ToDo.Middlware;
+using AutoMapper;
+using TodoApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
+builder.Services.AddAutoMapper(typeof(AppMappingProfile)); 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
