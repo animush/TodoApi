@@ -18,18 +18,30 @@ namespace ToDo.Repositories
         
         public async Task<IEnumerable<TodoItem>> Get()
         {
-            return await _context.TodoItems
+            return await _context.TodoItems.Include(b => b.CreatedUser)
                     .ToListAsync();
         }
         
         public async Task<TodoItem> Get(int id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var todoItem = await _context.TodoItems
+                .Include(b => b.ResponsibleUser)
+                .Include(b => b.CreatedUser)
+                .Include(b => b.Tools)
+                .FirstOrDefaultAsync(m => m.Id ==id);
             
             if (todoItem == null) 
                 throw new EntityNotFoundException($"TodoItem with id = {id} doesn't exists");
                
             return todoItem;
+        }
+        
+        public async Task<List<TodoItem>> GetByUser(int userId)
+        {
+            var todoItems = await _context.TodoItems
+                .Where(i => i.CreatedUser.Id == userId)
+                .ToListAsync();
+            return todoItems;
         }
 
         public async Task Update(int id, TodoItem todoItem)
@@ -64,5 +76,6 @@ namespace ToDo.Repositories
             _context.TodoItems.Remove(todoItem);
             await _context.SaveChangesAsync();
         }
+
     }
 }

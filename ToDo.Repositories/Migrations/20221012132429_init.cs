@@ -75,40 +75,28 @@ namespace ToDo.Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TodoItem_Tool",
+                name: "TodoItemTool",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TodoItemId = table.Column<int>(type: "int", nullable: false),
-                    ToolId = table.Column<int>(type: "int", nullable: false)
+                    TodoItemsId = table.Column<int>(type: "int", nullable: false),
+                    ToolsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TodoItem_Tool", x => x.Id);
+                    table.PrimaryKey("PK_TodoItemTool", x => new { x.TodoItemsId, x.ToolsId });
                     table.ForeignKey(
-                        name: "FK_TodoItem_Tool_TodoItems_TodoItemId",
-                        column: x => x.TodoItemId,
+                        name: "FK_TodoItemTool_TodoItems_TodoItemsId",
+                        column: x => x.TodoItemsId,
                         principalTable: "TodoItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TodoItem_Tool_Tools_ToolId",
-                        column: x => x.ToolId,
+                        name: "FK_TodoItemTool_Tools_ToolsId",
+                        column: x => x.ToolsId,
                         principalTable: "Tools",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TodoItem_Tool_TodoItemId",
-                table: "TodoItem_Tool",
-                column: "TodoItemId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TodoItem_Tool_ToolId",
-                table: "TodoItem_Tool",
-                column: "ToolId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TodoItems_CreatedUserId",
@@ -124,12 +112,17 @@ namespace ToDo.Repositories.Migrations
                 name: "IX_TodoItems_UpdatdeUserId",
                 table: "TodoItems",
                 column: "UpdatdeUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TodoItemTool_ToolsId",
+                table: "TodoItemTool",
+                column: "ToolsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TodoItem_Tool");
+                name: "TodoItemTool");
 
             migrationBuilder.DropTable(
                 name: "TodoItems");

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using ToDo.Models;
-using ToDo.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ToDo.Repositories
 {
@@ -12,19 +13,12 @@ namespace ToDo.Repositories
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TodoItem_Tool>()
-                .HasOne(i => i.TodoItem)
-                .WithMany(t => t.TodoItem_Tool)
-                .HasForeignKey(i => i.TodoItemId);
-            modelBuilder.Entity<TodoItem_Tool>()
-                .HasOne(t => t.Tool)
-                .WithMany(i => i.TodoItem_Tool)
-                .HasForeignKey(i => i.ToolId);
+            //modelBuilder.Entity<TodoItem>()
+            //    .HasMany<Tool>(s => s.Tools)
+            //    .WithMany(c => c.TodoItems);
         }
         public DbSet<TodoItem> TodoItems { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Tool> Tools { get; set; } = null!;
-        public DbSet<TodoItem_Tool> TodoItem_Tool { get; set; } = null!;
-
     }
 }

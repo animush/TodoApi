@@ -8,7 +8,7 @@ namespace TodoApi
         public AppMappingProfile()
         {
             CreateMap<TodoItem, TodoItemDTO>();
-            
+            CreateMap<Tool, ToolDTO>();
         }
     }
 }

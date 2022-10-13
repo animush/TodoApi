@@ -10,8 +10,6 @@
         public DateTime CreatedDate { get; set; }
         public User? UpdatdeUser { get; set; }
         public DateTime? UpatededDate { get; set; }
-
-        public List<TodoItem_Tool> TodoItem_Tool { get; set; }
-
+        public  ICollection<Tool> Tools { get; set; }
     }
 }

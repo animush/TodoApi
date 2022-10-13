@@ -37,30 +37,21 @@ namespace ToDo.Controllers
         public async Task<ActionResult<TodoItemDTO>> Get(int id)
         {
             var item = await _service.Get(id);
-            //return Ok(item.Map());
+            
             return Ok(_mapper.Map<TodoItemDTO>(item));
         }
 
-        //[HttpGet("byUser/{id}")]
-        //public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetByUser(int userId)
-        //{
-        //    //var item = await _service.Get(id);
-        //    //return Ok(item.Map());
-        //    throw new NotImplementedException();
-        //}
-        //[HttpGet("byCreationDate/{dt}")]
-        //public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetByCreationDate(DateTime dt)
-        //{
-        //    //var item = await _service.Get(id);
-        //    //return Ok(item.Map());
-        //    throw new NotImplementedException();
-        //}
+        [HttpGet("byUser/{id}")]
+        public async Task<ActionResult<List<TodoItemDTO>>> GetByUser(int userId)
+        {
+            var items = await _service.GetByUser(userId);
+            return Ok(items.Select(x => x.Map()).ToArray());
+        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, TodoItemDTO todoItemDTO)
         {
-            await _service.Update(id, todoItemDTO.Map());
-
+            await _service.Update(id, todoItemDTO.Map()); 
             return NoContent();
         }
 
@@ -86,6 +77,13 @@ namespace ToDo.Controllers
         public async Task<IActionResult> AssignUser(int itemId, int userId)
         {
             await _service.AssignResponsibleUser(itemId, userId);
+
+            return NoContent();
+        }
+        [HttpPatch("{itemId}/AssignTool/")]
+        public async Task<IActionResult> AssignTools(int itemId, IEnumerable<int> toolsId)
+        {
+            await _service.AssignResponsibleTools(itemId, toolsId);
 
             return NoContent();
         }

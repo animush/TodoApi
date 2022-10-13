@@ -16,5 +16,21 @@ namespace ToDo.Services
         {
             return await _toolRepository.Create(tool);
         }
+        public async Task<Tool> Get(int id)
+        {
+            return await _toolRepository.Get(id);
+        }
+        public async Task<Tool> Get(string toolName)
+        {
+            return await _toolRepository.Get(toolName);
+        }
+        public async Task Update(int id, Tool tool)
+        {
+            await _toolRepository.Update(id, tool);
+        }
+        public async Task Delete(int id)
+        {
+            await _toolRepository.Delete(id);
+        }
     }
 }

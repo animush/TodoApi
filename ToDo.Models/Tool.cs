@@ -4,10 +4,6 @@
     {
         public int Id { get; set; }
         public string ToolName { get; set; }
-
-        // Navigations properties
-
-        public List<TodoItem_Tool> TodoItem_Tool { get; set; }
-
+        public virtual ICollection<TodoItem> TodoItems { get; set; }
     }
 }

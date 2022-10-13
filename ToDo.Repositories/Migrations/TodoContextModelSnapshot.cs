@@ -63,29 +63,6 @@ namespace ToDo.Repositories.Migrations
                     b.ToTable("TodoItems");
                 });
 
-            modelBuilder.Entity("ToDo.Models.TodoItem_Tool", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("TodoItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ToolId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TodoItemId");
-
-                    b.HasIndex("ToolId");
-
-                    b.ToTable("TodoItem_Tool");
-                });
-
             modelBuilder.Entity("ToDo.Models.Tool", b =>
                 {
                     b.Property<int>("Id")
@@ -136,6 +113,21 @@ namespace ToDo.Repositories.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TodoItemTool", b =>
+                {
+                    b.Property<int>("TodoItemsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToolsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TodoItemsId", "ToolsId");
+
+                    b.HasIndex("ToolsId");
+
+                    b.ToTable("TodoItemTool");
+                });
+
             modelBuilder.Entity("ToDo.Models.TodoItem", b =>
                 {
                     b.HasOne("ToDo.Models.User", "CreatedUser")
@@ -159,33 +151,19 @@ namespace ToDo.Repositories.Migrations
                     b.Navigation("UpdatdeUser");
                 });
 
-            modelBuilder.Entity("ToDo.Models.TodoItem_Tool", b =>
+            modelBuilder.Entity("TodoItemTool", b =>
                 {
-                    b.HasOne("ToDo.Models.TodoItem", "TodoItem")
-                        .WithMany("TodoItem_Tool")
-                        .HasForeignKey("TodoItemId")
+                    b.HasOne("ToDo.Models.TodoItem", null)
+                        .WithMany()
+                        .HasForeignKey("TodoItemsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ToDo.Models.Tool", "Tool")
-                        .WithMany("TodoItem_Tool")
-                        .HasForeignKey("ToolId")
+                    b.HasOne("ToDo.Models.Tool", null)
+                        .WithMany()
+                        .HasForeignKey("ToolsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("TodoItem");
-
-                    b.Navigation("Tool");
-                });
-
-            modelBuilder.Entity("ToDo.Models.TodoItem", b =>
-                {
-                    b.Navigation("TodoItem_Tool");
-                });
-
-            modelBuilder.Entity("ToDo.Models.Tool", b =>
-                {
-                    b.Navigation("TodoItem_Tool");
                 });
 #pragma warning restore 612, 618
         }

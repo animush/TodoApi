@@ -22,5 +22,26 @@ namespace ToDo.Controllers
 
             return CreatedAtAction(nameof(Create), tool);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ToolDTO>> Get(int id)
+        {
+            var tool = await _service.Get(id);
+            return Ok(tool.Map());
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, ToolDTO toolDTO)
+        {
+            await _service.Update(id, toolDTO.Map());
+
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _service.Delete(id);
+
+            return NoContent();
+        }
+
     }
 }
