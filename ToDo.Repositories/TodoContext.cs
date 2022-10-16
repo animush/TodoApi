@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Diagnostics;
 using ToDo.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -13,9 +14,16 @@ namespace ToDo.Repositories
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<TodoItem>()
-            //    .HasMany<Tool>(s => s.Tools)
-            //    .WithMany(c => c.TodoItems);
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Username = "admin",
+                    FirstName = "William",
+                    LastName = "Shakespeare",
+                    Password = "admin",
+                    Role = "Admin"
+                }
+            );
         }
         public DbSet<TodoItem> TodoItems { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
