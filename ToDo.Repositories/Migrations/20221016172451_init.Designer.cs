@@ -12,7 +12,7 @@ using ToDo.Repositories;
 namespace ToDo.Repositories.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20221012200828_init")]
+    [Migration("20221016172451_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -113,6 +113,32 @@ namespace ToDo.Repositories.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "William",
+                            LastName = "Shakespeare",
+                            Password = "admin",
+                            Role = "Admin",
+                            Username = "admin"
+                        });
+                });
+
+            modelBuilder.Entity("TodoItemTool", b =>
+                {
+                    b.Property<int>("TodoItemsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToolsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TodoItemsId", "ToolsId");
+
+                    b.HasIndex("ToolsId");
+
+                    b.ToTable("TodoItemTool");
                 });
 
             modelBuilder.Entity("ToDo.Models.TodoItem", b =>
@@ -136,6 +162,21 @@ namespace ToDo.Repositories.Migrations
                     b.Navigation("ResponsibleUser");
 
                     b.Navigation("UpdatdeUser");
+                });
+
+            modelBuilder.Entity("TodoItemTool", b =>
+                {
+                    b.HasOne("ToDo.Models.TodoItem", null)
+                        .WithMany()
+                        .HasForeignKey("TodoItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ToDo.Models.Tool", null)
+                        .WithMany()
+                        .HasForeignKey("ToolsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

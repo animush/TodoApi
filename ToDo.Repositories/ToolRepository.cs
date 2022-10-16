@@ -29,10 +29,10 @@ namespace ToDo.Repositories
 
         public async Task<Tool> Get(IEnumerable<int> ids)
         {
-        /*    var tool = await _context.Tools.FindAsync(id);
-            if (tool == null) throw new Exception($"Tool with id = {id} doesn't exists");
+            var tool = await _context.Tools.FindAsync(ids);
+            if (tool == null) throw new Exception($"Tool with id = {ids} doesn't exists");
             return tool;
-        */}
+        }
 
         public async Task<Tool> Get(string toolName)
         {
@@ -57,5 +57,6 @@ namespace ToDo.Repositories
             toolEx.ToolName = tool.ToolName;
             await _context.SaveChangesAsync();
         }
+
     }
 }

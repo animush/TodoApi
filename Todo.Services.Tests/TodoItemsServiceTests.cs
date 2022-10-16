@@ -22,7 +22,7 @@ namespace ToDo.Services.Tests
             _userRepositoryMock = new Mock<IUserRepository>();
             _userContextMock = new Mock<UserContext>();
 
-            TodoItemsService = new TodoItemsService(_todoItemsRepoMock.Object, _modelValidationMock.Object, _userRepositoryMock.Object, _userContextMock.Object);
+            //TodoItemsService = new TodoItemsService(_todoItemsRepoMock.Object, _modelValidationMock.Object, _userRepositoryMock.Object, _userContextMock.Object);
         }
 
         [TestMethod]

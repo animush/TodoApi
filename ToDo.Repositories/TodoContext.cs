@@ -16,7 +16,8 @@ namespace ToDo.Repositories
         {
             modelBuilder.Entity<User>().HasData(
                 new User
-                {
+                {   
+                    Id = 1,
                     Username = "admin",
                     FirstName = "William",
                     LastName = "Shakespeare",

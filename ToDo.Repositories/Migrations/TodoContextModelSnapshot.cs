@@ -111,6 +111,17 @@ namespace ToDo.Repositories.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "William",
+                            LastName = "Shakespeare",
+                            Password = "admin",
+                            Role = "Admin",
+                            Username = "admin"
+                        });
                 });
 
             modelBuilder.Entity("TodoItemTool", b =>

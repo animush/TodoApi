@@ -13,10 +13,10 @@ namespace ToDo.Services
         private ITodoItemsRepository _todoItemsRepository { get; set; }
         private IUserRepository _userRepository { get; set; }
         private readonly UserContext _userContext;
-        private ITodoItemsRepository object1;
-        private IModelValidations object2;
-        private IUserRepository object3;
-        private UserContext object4;
+        //private ITodoItemsRepository object1;
+        //private IModelValidations object2;
+        //private IUserRepository object3;
+        //private UserContext object4;
 
         private IToolRepository _toolRepository { get; set; }
 
@@ -29,13 +29,13 @@ namespace ToDo.Services
             _toolRepository = toolRepository;
         }
 
-        public TodoItemsService(ITodoItemsRepository object1, IModelValidations object2, IUserRepository object3, UserContext object4)
-        {
-            this.object1 = object1;
-            this.object2 = object2;
-            this.object3 = object3;
-            this.object4 = object4;
-        }
+        //public TodoItemsService(ITodoItemsRepository object1, IModelValidations object2, IUserRepository object3, UserContext object4)
+        //{
+        //    this.object1 = object1;
+        //    this.object2 = object2;
+        //    this.object3 = object3;
+        //    this.object4 = object4;
+        //}
 
         public async Task<IEnumerable<TodoItem>> Get()
         {

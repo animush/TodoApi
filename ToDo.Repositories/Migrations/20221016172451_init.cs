@@ -74,6 +74,35 @@ namespace ToDo.Repositories.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TodoItemTool",
+                columns: table => new
+                {
+                    TodoItemsId = table.Column<int>(type: "int", nullable: false),
+                    ToolsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TodoItemTool", x => new { x.TodoItemsId, x.ToolsId });
+                    table.ForeignKey(
+                        name: "FK_TodoItemTool_TodoItems_TodoItemsId",
+                        column: x => x.TodoItemsId,
+                        principalTable: "TodoItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TodoItemTool_Tools_ToolsId",
+                        column: x => x.ToolsId,
+                        principalTable: "Tools",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "FirstName", "LastName", "Password", "Role", "Username" },
+                values: new object[] { 1, "William", "Shakespeare", "admin", "Admin", "admin" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_TodoItems_CreatedUserId",
                 table: "TodoItems",
@@ -88,10 +117,18 @@ namespace ToDo.Repositories.Migrations
                 name: "IX_TodoItems_UpdatdeUserId",
                 table: "TodoItems",
                 column: "UpdatdeUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TodoItemTool_ToolsId",
+                table: "TodoItemTool",
+                column: "ToolsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "TodoItemTool");
+
             migrationBuilder.DropTable(
                 name: "TodoItems");
 

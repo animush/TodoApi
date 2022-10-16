@@ -9,7 +9,7 @@ using AutoMapper;
 
 namespace ToDo.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TodoItemsController : ControllerBase
