@@ -35,7 +35,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
-var connString = builder.Configuration.GetConnectionString("HomeConnection");
+var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<TodoContext>(options =>
     options.UseSqlServer(connString));
 

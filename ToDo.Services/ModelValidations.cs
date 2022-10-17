@@ -11,5 +11,13 @@ namespace ToDo.Services
             //throw new Exception("todoItem.Name should't be empty!");
             return true;
         }
+        // TO DO: Fix
+        public async Task<bool> Validate(User user)
+        {
+            if (string.IsNullOrWhiteSpace(user.Username))
+                return false;
+            //throw new Exception("todoItem.Name should't be empty!");
+            return true;
+        }
     }
 }

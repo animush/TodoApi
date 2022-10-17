@@ -14,4 +14,12 @@ namespace ToDo.Common.Exceptions
             _message = message;
         }
     }
+    public class ValidationException : ApplicationException
+    {
+        private string _message = String.Empty;
+        public ValidationException(string message)
+        {
+            _message = message;
+        }
+    }
 }

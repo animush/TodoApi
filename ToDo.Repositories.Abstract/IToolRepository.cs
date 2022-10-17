@@ -6,7 +6,7 @@ namespace ToDo.Repositories.Abstract
     {
         Task<Tool> Create(Tool tool);
         Task<Tool> Get(int toolId);
-        Task<Tool> Get(IEnumerable<int> ids);
+        Task<ICollection<Tool>> Get(IEnumerable<int> ids);
         Task<Tool> Get(string toolName);
         Task Update(int id, Tool tool);
         Task Delete(int id);

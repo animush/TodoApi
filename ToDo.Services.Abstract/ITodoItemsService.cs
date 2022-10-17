@@ -11,6 +11,6 @@ namespace ToDo.Services.Abstract
         Task Update(int id, TodoItem todoItem);
         Task Delete(int id);
         Task AssignResponsibleUser(int todoItemId, int userId);
-        Task AssignResponsibleTools(int itemId, IEnumerable<int> toolsId);
+        Task AssignTools(int itemId, IEnumerable<int> toolsId);
     }
 }

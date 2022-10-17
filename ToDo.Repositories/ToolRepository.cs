@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToDo.Models;
 using ToDo.Repositories.Abstract;
+using System.Linq;
+using ToDo.Common.Exceptions;
 
 namespace ToDo.Repositories
 {
@@ -23,16 +25,16 @@ namespace ToDo.Repositories
         public async Task<Tool> Get(int id)
         {
             var tool = await _context.Tools.FindAsync(id);
-            if (tool == null) throw new Exception($"Tool with id = {id} doesn't exists");
+            if (tool == null) throw new EntityNotFoundException($"Tool with id = {id} doesn't exists");
             return tool;
         }
 
-        public async Task<Tool> Get(IEnumerable<int> ids)
+        public async Task<ICollection<Tool>> Get(IEnumerable<int> ids)
         {
-            var tool = await _context.Tools.FindAsync(ids);
-            if (tool == null) throw new Exception($"Tool with id = {ids} doesn't exists");
-            return tool;
+            var tools = await _context.Tools.Where(r => ids.Contains(r.Id)).ToListAsync();
+            return tools;
         }
+
 
         public async Task<Tool> Get(string toolName)
         {
@@ -58,5 +60,6 @@ namespace ToDo.Repositories
             await _context.SaveChangesAsync();
         }
 
+        
     }
 }

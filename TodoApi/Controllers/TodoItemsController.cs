@@ -83,7 +83,7 @@ namespace ToDo.Controllers
         [HttpPatch("{itemId}/AssignTool/")]
         public async Task<IActionResult> AssignTools(int itemId, IEnumerable<int> toolsId)
         {
-            await _service.AssignResponsibleTools(itemId, toolsId);
+            await _service.AssignTools(itemId, toolsId);
 
             return NoContent();
         }

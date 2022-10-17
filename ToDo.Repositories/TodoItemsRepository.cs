@@ -4,6 +4,7 @@ using ToDo.Common.Exceptions;
 using ToDo.Repositories.Abstract;
 using ToDo.Models;
 
+
 namespace ToDo.Repositories
 {
     public class TodoItemsRepository : ITodoItemsRepository
@@ -44,6 +45,7 @@ namespace ToDo.Repositories
             return todoItems;
         }
 
+        
         public async Task Update(int id, TodoItem todoItem)
         {
             var todoItemEx = await _context.TodoItems.FindAsync(id);

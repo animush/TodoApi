@@ -4,6 +4,7 @@ using ToDo.Repositories.Abstract;
 using ToDo.Services;
 using ToDo.Services.Abstract;
 using ToDo.Models;
+using ToDo.Common.Exceptions;
 
 namespace ToDo.Services
 {
@@ -62,7 +63,7 @@ namespace ToDo.Services
         public async Task<TodoItem> Create(TodoItem todoItem)
         {
             if (!await _validation.Validate(todoItem))
-                throw new Exception();
+                throw new ValidationException("Such User already exist");
 
             todoItem.CreatedDate = DateTime.Now;
             todoItem.CreatedUser = await _userRepository.Get(_userContext.CurrentUserId);
@@ -82,16 +83,11 @@ namespace ToDo.Services
             await _todoItemsRepository.Update(todoItemId, item);
         }
 
-        public async Task AssignResponsibleTools(int itemId, IEnumerable<int> toolsId)
+        public async Task AssignTools(int itemId, IEnumerable<int> toolsId)
         {
+            // TO DO: Add validation no more 5 tools
             var item = await _todoItemsRepository.Get(itemId);
-            var list = new List<Tool>();
-            foreach (var toolId in toolsId)
-            {
-                var tool = await _toolRepository.Get(toolId);
-                list.Add(tool);
-            }
-            item.Tools = list;
+            item.Tools = await _toolRepository.Get(toolsId);
             await _todoItemsRepository.Update(itemId, item);
         }
     }

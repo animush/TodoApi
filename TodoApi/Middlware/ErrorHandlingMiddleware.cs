@@ -1,7 +1,7 @@
 ﻿//using Newtonsoft.Json;
 using System.Net;
 using System.Text.Json;
-
+using ToDo.Common.Exceptions;
 
 namespace ToDo.Middlware
 {
@@ -25,7 +25,7 @@ namespace ToDo.Middlware
 
                 switch (error)
                 {
-                    case KeyNotFoundException e:
+                    case EntityNotFoundException e:
                         // not found error
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
