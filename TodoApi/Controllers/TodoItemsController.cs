@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using ToDo.Services.Abstract;
 using ToDo.Models;
 using System.Data;
-using System.Data.SqlClient;
-using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
-using System.Net.Http;
-using Todo.Common;
-using Microsoft.AspNetCore.Http;
+using System;
+using System.Net;
+using System.IO;
+using System.Text;
+using NuGet.Protocol;
 
 namespace ToDo.Controllers
 {
@@ -50,16 +50,22 @@ namespace ToDo.Controllers
             var items = await _service.GetByUser(userId);
             return Ok(items.Select(x => x.Map()).ToArray());
         }
+        
         [HttpGet("GetLocation")]
         public async Task<ActionResult> GetLocation()
         {
-            
-            // Must obtain user IP Address from header
-            //this.HttpContext.Request.Headers.
-            GeolocationHelper geolocationHelper = new GeolocationHelper();
-            var result = geolocationHelper.GetGeoInfo();
-            return Ok(result);
+
+
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            //var userIp = "46.201.7.98";
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://ipapi.co/{userIp}/json/");
+            //request.UserAgent = "ipapi.co/#c-sharp-v1.03";
+            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //var reader = new System.IO.StreamReader(response.GetResponseStream(), UTF8Encoding.UTF8);
+            //reader.ReadToEnd()
+            return Ok();
         }
+        
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, TodoItemDTO todoItemDTO)
