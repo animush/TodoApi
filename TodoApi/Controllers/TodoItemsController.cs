@@ -6,6 +6,9 @@ using System.Data;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
+using System.Net.Http;
+using Todo.Common;
+using Microsoft.AspNetCore.Http;
 
 namespace ToDo.Controllers
 {
@@ -37,7 +40,7 @@ namespace ToDo.Controllers
         public async Task<ActionResult<TodoItemDTO>> Get(int id)
         {
             var item = await _service.Get(id);
-            
+
             return Ok(_mapper.Map<TodoItemDTO>(item));
         }
 
@@ -46,6 +49,16 @@ namespace ToDo.Controllers
         {
             var items = await _service.GetByUser(userId);
             return Ok(items.Select(x => x.Map()).ToArray());
+        }
+        [HttpGet("GetLocation")]
+        public async Task<ActionResult> GetLocation()
+        {
+            
+            // Must obtain user IP Address from header
+            //this.HttpContext.Request.Headers.
+            GeolocationHelper geolocationHelper = new GeolocationHelper();
+            var result = geolocationHelper.GetGeoInfo();
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
